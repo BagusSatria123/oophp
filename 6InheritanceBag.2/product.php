@@ -1,6 +1,6 @@
 <?php
 
-class Produk5
+class Produk4
 {
     //pilihan 2
     public $judul,
@@ -8,17 +8,15 @@ class Produk5
         $penerbit,
         $harga,
         $jmlHalaman,
-        $waktuMain,
-        $tipe;
+        $waktuMain;
     //tipe untuk pilih komik atau game
-
     public  function sayHello()
     {
         return "Hello word";
     }
 
     // plihan 2
-    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0, $tipe)
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0)
     {
         $this->judul = $judul;
         $this->penulis = $penulis;
@@ -26,7 +24,6 @@ class Produk5
         $this->harga = $harga;
         $this->jmlHalaman = $jmlHalaman;
         $this->waktuMain = $waktuMain;
-        $this->tipe = $tipe;
     }
 
     public  function getLabel()
@@ -34,19 +31,34 @@ class Produk5
         return "$this->penulis,$this->penerbit";
     }
 
-    public function getInfoLengkap()
+    public function getInfoProduk()
     {
         //Komik : Naruto | Mashashi kishimoto, Shonen Jump (Rp. 3000) -100 halaman.
-        $str = "{$this->tipe} : {$this->getLabel()} (Rp. {$this->harga})";
+        $str = "{$this->judul} : {$this->getLabel()} (Rp. {$this->harga})";
 
-        if ($this->tipe == "Komik") {
-            $str .= " - {$this->jmlHalaman} Halaman.";
-        } else if ($this->tipe == "Game") {
-            $str .= " ~ {$this->waktuMain} Jam.";
-        }
         return $str;
     }
 }
+
+//Inheritance tidak punya constructor
+class Komik extends Produk4
+{
+    public function getInfoKomik()
+    {
+        $str = "Komik : {$this->getInfoProduk()} - {$this->jmlHalaman} halaman.";
+        return $str;
+    }
+}
+
+class Game extends Produk4
+{
+    public function getInfoGame()
+    {
+        $str = "Game : {$this->getInfoProduk()} - {$this->waktuMain} jam.";
+        return $str;
+    }
+}
+
 class CetakInfoProduk
 {
     //klo ingin fokus 1 class pake ini 
@@ -60,9 +72,9 @@ class CetakInfoProduk
 }
 //dibikin 0 agar mudah
 //menyesuaikan constructor diatas
-$produk3 = new Produk5("Naruto", "mashahi kisi", "anjay", 10000, 100, 0, "Komik");
-$produk4 = new Produk5("Narutoa", "mashahi kisia", "anjaya", 20000, 0, 50, "Game");
+$produk3 = new Komik("Naruto", "mashahi kisi", "anjay", 10000, 100, 0);
+$produk4 = new Game("Narutoa", "mashahi kisia", "anjaya", 20000, 0, 50);
 
-echo $produk3->getInfoLengkap();
+echo $produk3->getInfoKomik();
 echo "<br>";
-echo $produk4->getInfoLengkap();
+echo $produk4->getInfoGame();
