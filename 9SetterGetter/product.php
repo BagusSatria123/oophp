@@ -3,7 +3,7 @@
 //private digunakan di class tertentu
 //public bisa diluar class
 //protected bisa di satu class serta turunannya
-class Produk6
+class Produk20
 {
     //pilihan 2
     private $judul,
@@ -95,7 +95,7 @@ class Produk6
 }
 
 //Inheritance tidak punya constructor
-class Komik extends Produk6
+class Komik extends Produk20
 {
     public $jmlHalaman;
     public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0)
@@ -112,7 +112,7 @@ class Komik extends Produk6
     }
 }
 
-class Game extends Produk6
+class Game extends Produk20
 {
     public $waktuMain;
 
